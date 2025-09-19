@@ -2,7 +2,7 @@
 
 バカガキ Tier 表
 
-## Hint
+## Reference
 
 https://yude.github.io/ahnmika-white/
 
