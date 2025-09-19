@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>バカガキ</title>
+    <script defer>
+      let count = 0;
+      let abbr = Array(200).fill("バカガキ");
+
+      function bakagakicount() {
+        alert(`${count}棟のバーガーキング`);
+      }
+
+      function bakagakiGenerate() {
+        /**
+         * @param {string} s
+         * @returns {string}
+         */
+        function randomSubsequence(s) {
+          return [...s].filter(() => Math.random() < 0.5).join("");
+        }
+
+        const s = "バーガーキング";
+        return randomSubsequence(s);
+      }
+
+      for (var i = 0; i < 200; i++) {
+        const incr = (j) => {
+          return () => {
+            abbr[j] = bakagakiGenerate();
+            count++;
+          };
+        };
+        setInterval(incr(i), 1);
+      }
+
+      let area;
+      function show() {
+        if (area === undefined) {
+          area = document.getElementById("bakagakiarea");
+        }
+
+        let l = "";
+        abbr.forEach((a) => {
+          l += `${a}\n`;
+        });
+        area.value = l;
+
+        document.title = abbr[0];
+      }
+      setInterval(show, 1);
+    </script>
+  </head>
+  <body>
+    <textarea
+      name="bakagakiarea"
+      id="bakagakiarea"
+      style="height: 500px"
+      readonly
+    ></textarea>
+    <br />
+    <input
+      type="button"
+      value="バーガーキングを数える"
+      id="bakagakicount"
+      onclick="bakagakicount()"
+    />
+  </body>
+</html>
