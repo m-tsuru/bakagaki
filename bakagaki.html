@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>バカガキ</title>
+  </head>
+  <body>
+    <textarea
+      name="bakagakiarea"
+      id="bakagakiarea"
+      style="height: 500px"
+      readonly
+    ></textarea>
+    <br />
+    <input
+      type="button"
+      value="バーガーキングを数える"
+      id="bakagakicount"
+      onclick="bakagakicount()"
+    />
     <script>
       let count = 0;
       let abbr = Array(200).fill("バカガキ");
@@ -25,46 +40,20 @@
         return randomSubsequence(s);
       }
 
-      for (var i = 0; i < 200; i++) {
-        const incr = (j) => {
-          return () => {
-            abbr[j] = bakagakiGenerate();
-            count++;
-          };
-        };
-        setInterval(incr(i), 1);
-      }
-
-      let area;
       function show() {
-        if (area === undefined) {
-          area = document.getElementById("bakagakiarea");
-        }
+        let area = document.getElementById("bakagakiarea");
 
-        let l = "";
-        abbr.forEach((a) => {
-          l += `${a}\n`;
-        });
-        area.value = l;
+        for (var i = 0; i < 200; i++) {
+          abbr[i] = bakagakiGenerate();
+          count++;
+        }
+        area.value = abbr.join('\n');
 
         document.title = abbr[0];
+
+        requestAnimationFrame(show);
       }
-      setInterval(show, 1);
+      show();
     </script>
-  </head>
-  <body>
-    <textarea
-      name="bakagakiarea"
-      id="bakagakiarea"
-      style="height: 500px"
-      readonly
-    ></textarea>
-    <br />
-    <input
-      type="button"
-      value="バーガーキングを数える"
-      id="bakagakicount"
-      onclick="bakagakicount()"
-    />
   </body>
 </html>
